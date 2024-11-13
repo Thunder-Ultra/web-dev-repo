@@ -56,16 +56,3 @@ package() {
 	install -Dm644 "$pkgdir"/opt/google/chrome/WidevineCdm/LICENSE \
 		"$pkgdir"/usr/share/licenses/google-chrome-$_channel/WidevineCdm-LICENSE.txt
 
-	# Fix the Chrome desktop entry
-	sed -i \
-		-e "/Exec=/i\StartupWMClass=Google-chrome" \
-		-e "s/x-scheme-handler\/ftp;\?//g" \
-		"$pkgdir"/usr/share/applications/google-chrome.desktop
-
-	# Remove the Debian Cron job, duplicate product logos and menu directory
-	rm -r \
-		"$pkgdir"/etc/cron.daily/ \
-		"$pkgdir"/opt/google/chrome/cron/ \
-		"$pkgdir"/opt/google/chrome/product_logo_*.{png,xpm} \
-		"$pkgdir"/usr/share/menu/
-}
